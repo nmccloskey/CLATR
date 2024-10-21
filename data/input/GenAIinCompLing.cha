@@ -1,0 +1,55 @@
+@UTF8
+@Window:	0_0_0_0_614_1_1819_0_1819_0
+@Begin
+@Languages:	eng
+@Participants:	SPK Speaker
+@ID:	eng|corpus_name|SPK|||||Speaker|||
+*SPK:	The rise of generative AI has really changed the landscape of
+	computational linguistics.
+%com:	Introduction to the topic.
+*SPK:	In the past, much of the work in computational linguistics was
+	rule-based.
+%com:	Refers to earlier methods in the field.
+*SPK:	Researchers would create explicit grammar rules for machines to
+	process language.
+%com:	Explains how rule-based approaches functioned.
+*SPK:	This was very time-consuming and often not flexible enough for
+	real-world applications.
+%com:	Discusses limitations of rule-based approaches.
+*SPK:	Generative AI models, like GPT, have shifted the focus toward
+	data-driven approaches.
+%com:	Introduces generative AI and data-driven methods.
+*SPK:	These models use massive amounts of text data to learn patterns and
+	generate language.
+%com:	Describes the core mechanism of generative AI.
+*SPK:	One of the major advantages of this approach is that it doesn't rely
+	on predefined rules.
+%com:	Notes a key benefit of generative AI over rule-based systems.
+*SPK:	Instead, it learns from the data itself, allowing for greater
+	flexibility.
+%com:	Highlights the adaptive nature of generative models.
+*SPK:	This flexibility has improved performance in tasks like machine
+	translation and question answering.
+%com:	Gives examples of improved tasks.
+*SPK:	However, there are still some challenges, particularly around
+	interpretability.
+%com:	Mentions a key drawback.
+*SPK:	These models are often described as black boxes because it's hard
+	to understand how they make decisions.
+%com:	Expands on the problem of interpretability.
+*SPK:	Additionally, they can perpetuate biases that exist in the training
+	data.
+%com:	Introduces concerns about bias in AI models.
+*SPK:	Despite these challenges, generative AI has pushed computational
+	linguistics forward in a big way.
+%com:	Returns to the overall impact of generative AI.
+*SPK:	We're now able to tackle tasks that were once thought too complex
+	for machines.
+%com:	Points out the advancement in capabilities.
+*SPK:	But it's important to continue refining these systems to make them
+	more transparent and fair.
+%com:	Suggests areas for future development.
+*SPK:	Overall, I think the advent of generative AI has opened up a lot of
+	new possibilities in the field.
+%com:	Conclusion with a positive outlook.
+@End
