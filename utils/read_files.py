@@ -3,7 +3,7 @@ import pandas as pd
 import docx2txt as dx
 from tqdm import tqdm
 
-def read_input_files(input_folder='input/'):
+def read_input_files(uploads):
     """
     Read and process input text samples from various formats.
 
@@ -20,18 +20,19 @@ def read_input_files(input_folder='input/'):
       row is treated as an individual text sample.
 
     Args:
-        input_folder (str): The directory containing input files. Defaults to 'input/'.
+        uploads (dict): Input files as file_name:path_on_colab.
+        example:
+        {'GenAIinCompLing.cha': '/content/GenAIinCompLing.cha',
+        'LinguisticsDomains.xlsx': '/content/LinguisticsDomains.xlsx'}
 
     Returns:
         dict: A dictionary where each key is the file label and the value is the
         corresponding text from the file.
     """
     samples = {}
-    input_folder = os.path.join(os.getcwd(), input_folder)
-    input_files = list(os.listdir(input_folder))
 
-    for file_name in tqdm(input_files, desc='Reading Files', total=len(input_files)):
-        file_path = os.path.join(input_folder, file_name)
+    for file_name in tqdm(uploads, desc='Reading Files', total=len(uploads)):
+        file_path = uploads[file_name]
         
         if file_name.endswith('.cha'):
             try:
