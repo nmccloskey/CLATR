@@ -7,7 +7,8 @@ def read_input_files(input_folder='input/'):
     """
     Read and process input text samples from various formats.
 
-    This function supports multiple input file formats (.cha, .txt, .docx, .csv, .xlsx)
+    This function supports multiple input file formats
+    (.cha, .txt, .docx, .csv, .xlsx)
     and extracts text data for linguistic analysis.
 
     Supported Formats:
