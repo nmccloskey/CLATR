@@ -10,7 +10,7 @@ aggregate: False
 compare_groups: False
 
 # and visual output.
-visualize: True
+visualize: False
 cohen_d_threshold: 0.8
 max_feature_visuals: 5
 
@@ -29,7 +29,7 @@ comparison_combos: [
 ]
 
 all_comparison_combos: False
-compare_with_clusters: True
+compare_with_clusters: False
 
 # Group by each tier and each combination.
 aggregation_combos: [
@@ -46,13 +46,13 @@ aggregate_with_clusters: False
 
 ## CLATR-specific:
 # Specify granularity.
-sentence_level: True
+sentence_level: False
 
 # Select analyses.
 sections: {
     graphemes: False,
-    lexicon: True,
-    morphology: False,
+    lexicon: False,
+    morphology: True,
     syntax: False,
     phonology: False,
     semantics: False,

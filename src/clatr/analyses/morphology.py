@@ -7,6 +7,38 @@ from utils.OutputManager import OutputManager
 from data.data_processing import calc_props, get_most_common
 
 
+def estimate_mlu(doc):
+    """
+    Estimate Mean Length of Utterance (MLU) from a spaCy Doc.
+    
+    MLU = total morphemes / number of utterances (sentences)
+
+    This is a rough approximation based on:
+    - 1 morpheme per token
+    - +1 per morphological feature (as proxy for bound morphemes)
+
+    Args:
+        doc (Doc): A spaCy processed Doc object with sentence boundaries.
+
+    Returns:
+        dict: A dictionary with the estimated MLU.
+    """
+    if not doc or not list(doc.sents):
+        logger.warning("Document is empty or lacks sentence boundaries.")
+        return {}
+
+    total_morphemes = 0
+    sents = list(doc.sents)
+
+    for sent in sents:
+        for token in sent:
+            morph_features = str(token.morph)
+            morph_count = 1 + len(morph_features.split("|")) if morph_features else 1
+            total_morphemes += morph_count
+
+    mlu = total_morphemes / len(sents)
+    return {"mlu": round(mlu, 2)}
+
 def analyze_spacy_features(doc, num, feature_type="POS"):
     """
     Generalized function to analyze POS tags or dependency parsing features in a given `spaCy` doc.
@@ -145,7 +177,9 @@ def analyze_morphology(PM, sample_data):
 
         doc_data_base = {"doc_id": doc_id}
         doc = nlp(doc_cleaned)
-        func_data = morphological_analysis(doc, 10)
+        func_data = {}
+        func_data.update(estimate_mlu(doc))
+        func_data.update(morphological_analysis(doc, 10))
         func_data.update(analyze_spacy_features(doc, 10, "POS"))
 
         for table, row_data in func_data.items():
