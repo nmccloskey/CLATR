@@ -2,7 +2,7 @@
 
 ## Overview
 
-CLATR is a modular Python pipeline designed for computational linguistic analysis of textual data, providing detailed insights for linguistic research and analysis. It facilitates preprocessing, multiple specialized linguistic analyses, and comprehensive output management, including aggregation, comparison, clustering, and visualization capabilities.
+CLATR is a modular Python pipeline designed for computational linguistic analysis of textual data, providing detailed insights for linguistic research and analysis. It facilitates preprocessing, multiple specialized linguistic analyses, and comprehensive output management, including aggregation, comparison, clustering, and EDA capabilities.
 
 ## Features
 
@@ -59,7 +59,7 @@ project/
 input_dir: input
 output_dir: output
 database_dir: database
-output_label: test_clustermap
+output_label: clatr_data
 ```
 
 ### Processing Flags
@@ -67,7 +67,7 @@ output_label: test_clustermap
 ```yaml
 sentence_level: True         # Use sentence or document granularity
 dep_trees: False             # Disable dependency trees
-exclude_speakers: [INV]      # Ignore specific speakers
+exclude_speakers: [INV]      # Ignore specific speakers in .cha files
 ```
 
 ### Section Selection
@@ -78,18 +78,18 @@ Enable or disable specific analyses:
 sections:
   graphemes: False
   lexicon: True
-  morphology: False
-  syntax: False
-  phonology: False
-  semantics: False
+  morphology: True
+  syntax: True
+  phonology: True
+  semantics: True
   mechanics: False
 ```
 
 ### Aggregation & Group Comparison
 
 ```yaml
-cluster: False
-aggregate: False
+cluster: True
+aggregate: True
 compare_groups: False
 visualize: True
 
@@ -97,33 +97,28 @@ cohen_d_threshold: 0.8
 max_feature_visuals: 5
 ```
 
+## Installation
+
+### Recommended: Anaconda Navigator Command Line
+
+1. Create a virtual environment:
+   ```bash
+   conda create --name clatr_env python=3.9
+   ```
+2. Activate the environment:
+   ```bash
+   conda activate clatr_env
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
 ## Usage
 
 ```bash
 python src/clatr/main.py
 ```
-
-## Dependencies
-
-Install with:
-
-```bash
-pip install -r requirements.txt
-```
-
-## Notes
-
-- Input files should follow CHAT (.cha) format
-- Results will be exported as Excel spreadsheets
-- Customize the workflow through `user_settings.yaml`
-
-## License
-
-MIT License
-
-## Authors
-
-Developed by Nick McCloskey in the Speech, Language, and Brain lab at Temple University.
 
 ## Extending CLATR
 
@@ -133,7 +128,22 @@ To add custom analyses:
 2. Update `SECTION_CONFIG` in `PipelineManager.py` to include your analysis function and desired table structures.
 3. Enable your analysis in the `user_settings.yaml`.
 
-## Contributing
+## Status and Contact
 
-Contributions and feedback are welcome. Please submit a pull request or open an issue for discussion.
+This tool is released as a public **beta** version and is still under active development. While the core functionality is stable and has been used in research contexts, there are aspects of robustness, error handling, and user-friendliness which still want refinement.
 
+I warmly welcome feedback, feature suggestions, or bug reports. Feel free to reach out by:
+
+- Submitting an issue through the GitHub Issues tab
+
+- Emailing me directly at: nsm [at] temple.edu
+
+Thanks for your interest and collaboration!
+
+## Citation
+
+If using CLATR in your research, please cite:
+
+> McCloskey, N., et al. (2025, April). *The RASCAL pipeline: User-friendly and time-saving computational resources for coding and analyzing language samples*. Poster presented at the Aphasia Access Leadership Summit, Pittsburgh, PA.
+
+A copy of the poster will be available through Aphasia Access shared resources.
