@@ -1,4 +1,4 @@
-# CLATR - Computational Linguistic Analysis of Text for Research
+# CLATR - Comprehensive Linguistic Analysis of Text for Research
 
 ## Overview
 
