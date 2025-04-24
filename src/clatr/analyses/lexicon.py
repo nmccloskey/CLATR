@@ -149,6 +149,12 @@ def process_named_entities(doc, num):
 
     return results
 
+def get_lexical_ngram_data(doc, N):
+    func_data = {""}
+    tokens = [token.text for token in doc if token.is_alpha]
+
+
+
 def analyze_lexicon(PM, sample_data):
     """
     Perform lexical analysis.

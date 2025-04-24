@@ -41,7 +41,8 @@ def ngram_statistics(sequence: List[str], n: int) -> List[Dict]:
 
 # Example Usage
 if __name__ == "__main__":
-    sample_sequence = ["DT", "NN", "VB", "DT", "NN", "VB", "IN", "DT", "NN"]  # Example POS tags
-    ngram_results = ngram_statistics(sample_sequence, 2)  # Bigram analysis
+    sequence = ["DT", "NN", "VB", "DT", "NN", "VB", "IN", "DT", "NN"]  # Example POS tags
+    n = 2
+    ngram_results = ngram_statistics(sequence, n)  # Bigram analysis
     for record in ngram_results:
         print(record)

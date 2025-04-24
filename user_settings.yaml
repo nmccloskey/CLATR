@@ -1,7 +1,7 @@
 # Identify directories.
 input_dir: input
 output_dir: output
-output_label: test_clustermap
+output_label: test_sample_data_morph
 database_dir: database
 
 # Control tabular output,

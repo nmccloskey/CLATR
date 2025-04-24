@@ -4,7 +4,7 @@ import logging
 logger = logging.getLogger("CustomLogger")
 
 class Table:
-    def __init__(self, OM, name, sheet_name, section, subdir, file_name, primary_keys):
+    def __init__(self, OM, name, sheet_name, section, subdir, file_name, primary_keys, pivot=None):
         self.om = OM
         self.name = name
         self.sheet_name = sheet_name
@@ -25,6 +25,7 @@ class Table:
         self.granularity = None
         self.fact_table = None
         self.grouping_table = None
+        self.pivot = pivot
         
     def get_subdir(self):
         """Retrieve subfolder(s) within \section."""
@@ -47,3 +48,16 @@ class Table:
     
     def export_to_excel(self):
         self.om.export_sql_to_excel(self.name)
+
+    # def get_data(self, columns="*", filters=None, pivot=False):
+    #     if columns != "*":
+    #         columns = self.primary_keys + columns
+    #     df = self.om.access_data(self.name, columns, filters)
+    #     if pivot and self.pivot:
+    #         try:
+    #             df = df.pivot(index=self.pivot["index"],
+    #                         columns=self.pivot["columns"],
+    #                         values=self.pivot["values"]).reset_index()
+    #         except Exception as e:
+    #             logger.error(f"Failed to pivot table {self.name}: {e}")
+    #     return df

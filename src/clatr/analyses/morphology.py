@@ -37,7 +37,7 @@ def estimate_mlu(doc):
             total_morphemes += morph_count
 
     mlu = total_morphemes / len(sents)
-    return {"mlu": round(mlu, 2)}
+    return round(mlu, 2)
 
 def analyze_spacy_features(doc, num, feature_type="POS"):
     """
@@ -120,6 +120,8 @@ def morphological_analysis(doc, num):
     func_data["morpheme_basic_specs"]["num_morph_tagged_words"] = num_words_with_tags
     func_data["morpheme_basic_specs"]["ratio_morph_tagged_words"] = num_words_with_tags / len(doc) if len(doc) > 0 else 0
 
+    func_data["morpheme_basic_specs"]["mlu_estimate"] = estimate_mlu(doc)
+
     func_data["morph_tag_counts"].update(morph_types)
     func_data["morph_tag_props"].update(calc_props(morph_types, total_morph_tags))
     func_data["morph_tags_commonest"].update(get_most_common(Counter(pooled_morphs), num, "morph_tag"))
@@ -178,7 +180,6 @@ def analyze_morphology(PM, sample_data):
         doc_data_base = {"doc_id": doc_id}
         doc = nlp(doc_cleaned)
         func_data = {}
-        func_data.update(estimate_mlu(doc))
         func_data.update(morphological_analysis(doc, 10))
         func_data.update(analyze_spacy_features(doc, 10, "POS"))
 
