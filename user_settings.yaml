@@ -1,7 +1,7 @@
 # Identify directories.
 input_dir: input
 output_dir: output
-output_label: test_sample_data_morph
+output_label: test_readability
 database_dir: database
 
 # Control tabular output,
@@ -51,8 +51,8 @@ sentence_level: False
 # Select analyses.
 sections: {
     graphemes: False,
-    lexicon: False,
-    morphology: True,
+    lexicon: True,
+    morphology: False,
     syntax: False,
     phonology: False,
     semantics: False,

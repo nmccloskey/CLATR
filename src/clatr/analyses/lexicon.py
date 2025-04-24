@@ -6,6 +6,8 @@ from utils.NLPmodel import NLPmodel
 from lexicalrichness import LexicalRichness
 from wordfreq import word_frequency, zipf_frequency
 from data.data_processing import get_most_common
+from readability import Readability
+import textstat as tx
 
 
 def calculate_frequencies(doc, label):
@@ -153,7 +155,99 @@ def get_lexical_ngram_data(doc, N):
     func_data = {""}
     tokens = [token.text for token in doc if token.is_alpha]
 
+def calc_readability(doc):
+    """
+    Calculates various readability metrics for a given spaCy Doc object.
 
+    This function computes multiple readability scores (e.g., Flesch-Kincaid, Dale-Chall, ARI, etc.)
+    and additional text complexity metrics (e.g., difficult words, reading time) for a document.
+    It requires at least 100 alphabetic tokens in the document to produce results.
+
+    Parameters
+    ----------
+    doc : spacy.tokens.Doc
+        The spaCy Doc object to analyze.
+
+    Returns
+    -------
+    dict
+        A dictionary containing readability scores and related metrics. Returns an empty dictionary
+        if the document contains fewer than 100 words or if an error occurs.
+
+    Raises
+    ------
+    TypeError
+        If the input is not a spaCy Doc object.
+    """
+
+    if not hasattr(doc, 'text') or not hasattr(doc, '__iter__'):
+        raise TypeError("Input must be a spaCy Doc object.")
+
+    tokens = [token.text for token in doc if token.is_alpha]
+
+    if len(tokens) < 100:
+        logger.warning("Readability calculations not applicable to documents of <100 words.")
+        return {}
+
+    try:
+        func_data = {}
+        r = Readability(doc.text)
+
+        fk = r.flesch_kincaid()
+        func_data["flesch_kincaid_score"] = fk.score
+        func_data["fk_grade_level"] = fk.grade_level
+
+        f = r.flesch()
+        func_data["flesch_score"] = f.score
+        func_data["flesch_ease"] = f.ease
+        func_data["flesch_grade_levels"] = ", ".join(f.grade_levels)
+
+        dc = r.dale_chall()
+        func_data["dale_chall_score"] = dc.score
+        func_data["dc_grade_levels"] = ", ".join(dc.grade_levels)
+
+        ari = r.ari()
+        func_data["ari_score"] = ari.score
+        func_data["ari_grade_levels"] = ", ".join(ari.grade_levels)
+        func_data["ari_ages"] = ", ".join(ari.ages)
+
+        cl = r.coleman_liau()
+        func_data["coleman_liau_score"] = cl.score
+        func_data["cl_grade_level"] = cl.grade_level
+
+        gf = r.gunning_fog()
+        func_data["gunning_fog_score"] = gf.score
+        func_data["gf_grade_level"] = gf.grade_level
+
+        if len(list(doc.sents)) >= 30:
+            smog = r.smog(all_sentences=True)
+            func_data["smog_score"] = smog.score
+            func_data["smog_grade_level"] = smog.grade_level
+
+        s = r.spache()
+        func_data["spache_score"] = s.score
+        func_data["spache_grade_level"] = s.grade_level
+
+        lw = r.linsear_write()
+        func_data["linsear_write_score"] = lw.score
+        func_data["lw_grade_level"] = lw.grade_level
+    
+    except Exception as e:
+        logger.error(f"Failed to apply Readability library: {e}")
+
+    try:
+        func_data["text_standard"] = tx.text_standard(doc.text)
+        func_data["num_difficult_words"] = tx.difficult_words(doc.text)
+        func_data["prop_difficult_words"] = tx.difficult_words(doc.text) / len(doc)
+        func_data["difficult_words"] = ", ".join(tx.difficult_words_list(doc.text))
+        func_data["mcalpine_eflaw"] = tx.mcalpine_eflaw(doc.text)
+        func_data["reading_time"] = tx.reading_time(doc.text)
+        func_data["LIX"] = tx.lix(doc.text)
+        func_data["RIX"] = tx.rix(doc.text)
+    except Exception as e:
+        logger.error(f"Failed to apply textstat library: {e}")
+
+    return func_data
 
 def analyze_lexicon(PM, sample_data):
     """
@@ -222,6 +316,7 @@ def analyze_lexicon(PM, sample_data):
         func_data["freqs_cleaned"] = calculate_frequencies(doc, "cleaned")
         func_data["richness_cleaned"] = compute_lexical_richness(doc, "cleaned")
         func_data["named_entities"] = process_named_entities(doc, 10)
+        func_data["readability"] = calc_readability(doc)
 
         doc = nlp(doc_tokenized)
         func_data["freqs_tokenized"] = calculate_frequencies(doc, "semantic")

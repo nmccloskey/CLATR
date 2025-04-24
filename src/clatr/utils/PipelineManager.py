@@ -39,7 +39,7 @@ SECTION_CONFIG = {
         {
             "lex_measures": [
                 "freqs_cleaned", "freqs_tokenized", "richness_cleaned",
-                "richness_tokenized", "named_entities"
+                "richness_tokenized", "named_entities", "readability"
             ]
         }
     ),
