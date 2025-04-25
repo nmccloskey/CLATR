@@ -5,6 +5,7 @@ import pandas as pd
 from datetime import datetime
 import logging
 logger = logging.getLogger("CustomLogger")
+from utils.logger import logger, configure_file_handler
 from utils.Tier import TierManager
 from utils.EDADaemon import EDADaemon
 from utils.SQLDaemon import SQLDaemon
@@ -48,28 +49,31 @@ class OutputManager:
         self.config = self._load_yaml(config_file)
         logger.info(f"Loaded config: {self.config}")
 
+        self.output_label = self.config.get("output_label", "")
+        configure_file_handler(self.output_label)
+
         self.input_dir = self.config.get("input_dir", "input")
         self.output_dir = self.config.get("output_dir", "output")
-        self.output_label = self.config.get("output_label", "")
         self.database_dir = self.config.get("database_dir", "database")
         self.sections = self.config.get("sections", {})
-        self.cluster = self.config.get("cluster", False)
         
+        self.cluster = self.config.get("cluster", False)
+        self.visualize = self.config.get("visualize", False)
         self.aggregate = self.config.get("aggregate", False)
+        self.compare_groups = self.config.get("compare_groups", False)
+
+        self.cohen_d_threshold = self.config.get("cohen_d_threshold", 0.8)
+        self.max_feature_visuals = self.config.get("max_feature_visuals", 5)
+
         self.aggregation_combos = self.config.get("aggregation_combos", [])
         self.all_aggregation_combos = self.config.get("all_aggregation_combos", False)
         self.aggregate_with_clusters = self.config.get("aggregate_with_clusters", False)
         self.aggregation_cols = list(set([col for combo in self.aggregation_combos for col in combo]))
-
-        self.compare_groups = self.config.get("compare_groups", False)
+        
         self.comparison_combos = self.config.get("comparison_combos", [])
         self.all_comparison_combos = self.config.get("all_comparison_combos", False)
         self.compare_with_clusters = self.config.get("compare_with_clusters", False)
         self.comparison_cols = list(set([col for combo in self.comparison_combos for col in combo]))
-        
-        self.visualize = self.config.get("visualize", False)
-        self.cohen_d_threshold = self.config.get("cohen_d_threshold", 0.8)
-        self.max_feature_visuals = self.config.get("max_feature_visuals", 5)
 
     def _init_output_dir(self):
         self.timestamp = datetime.now().strftime("%y%m%d_%H%M")
