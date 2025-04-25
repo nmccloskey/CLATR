@@ -288,12 +288,13 @@ def analyze_lexicon(PM, sample_data):
                 func_data["freqs_tokenized"] = calculate_frequencies(doc, "semantic")
                 func_data["richness_tokenized"] = compute_lexical_richness(doc, "semantic")
 
+                summary_data, ngram_data = compute_ngrams(PM, tokens, sent_data_base, "lexicon", "lex", "sent")
+                func_data.update(summary_data)
+
                 for table, row_data in func_data.items():
                     sent_data = sent_data_base.copy()
                     sent_data.update(row_data)
                     results[f"{table}_sent"].append(sent_data)
-                
-                ngram_data = compute_ngrams(PM, tokens, sent_data_base, "lexicon", "lex", "sent")
 
                 for table, data in ngram_data.items():
                     for row_data in data:
@@ -328,12 +329,13 @@ def analyze_lexicon(PM, sample_data):
         func_data["freqs_tokenized"] = calculate_frequencies(doc, "semantic")
         func_data["richness_tokenized"] = compute_lexical_richness(doc, "semantic")
 
+        summary_data, ngram_data = compute_ngrams(PM, tokens, doc_data_base, "lexicon", "lex", "doc")
+        func_data.update(summary_data)
+
         for table, row_data in func_data.items():
             doc_data = doc_data_base.copy()
             doc_data.update(row_data)
             results[f"{table}_doc"].update(doc_data)
-        
-        ngram_data = compute_ngrams(PM, tokens, doc_data_base, "lexicon", "lex", "doc")
 
         for table, data in ngram_data.items():
             for row_data in data:
