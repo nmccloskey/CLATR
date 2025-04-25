@@ -34,7 +34,9 @@ SECTION_CONFIG = {
                 "grapheme_modes", "word_counts", "word_props"
             ],
             
-            "grapheme_ngrams": [f"grapheme_n{n}grams" for n in range(1, ngrams + 1)]
+            "grapheme_ngrams": [
+                "grapheme_ngram_summary"
+            ] + [f"grapheme_n{n}grams" for n in range(1, ngrams + 1)]
         }
     ),
     
@@ -46,7 +48,9 @@ SECTION_CONFIG = {
                 "richness_tokenized", "named_entities", "readability"
             ],
             
-            "lex_ngrams": [f"lex_n{n}grams" for n in range(1, ngrams + 1)]
+            "lex_ngrams": [
+                "lex_ngram_summary"
+            ] + [f"lex_n{n}grams" for n in range(1, ngrams + 1)]
         }
     ),
     
@@ -171,7 +175,7 @@ class Analysis:
                     table_name = f"{table}_{gran}"
                     file_name = f"{file_base}_{gran}.xlsx"
 
-                    if "ngrams" in file_base:
+                    if table.endswith("grams"):
                         pivot = {
                             "index": "doc_id", "columns": "ngram", "values": "prop"
                         }

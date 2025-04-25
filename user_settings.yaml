@@ -1,7 +1,7 @@
 # Identify directories.
 input_dir: input
 output_dir: output
-output_label: test_ngrams_lex
+output_label: test_new_ngrams
 database_dir: database
 
 # Control tabular output,
@@ -50,8 +50,8 @@ sentence_level: True
 
 # Select analyses.
 sections: {
-    graphemes: False,
-    lexicon: True,
+    graphemes: True,
+    lexicon: False,
     morphology: False,
     syntax: False,
     phonology: False,
