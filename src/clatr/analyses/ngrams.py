@@ -3,14 +3,13 @@ from collections import Counter
 from math import log2
 from typing import List, Dict
 
-def compute_ngrams(PM, sequence: List[str], row_base: Dict, section: str, prefix: str, gran: str) -> Dict[str, List[Dict]]:
+def compute_ngrams(PM, sequence: List[str], row_base: Dict, prefix: str, gran: str) -> Dict[str, List[Dict]]:
     """
     Computes n-grams and associated statistics for a given sequence.
 
     Args:
         sequence (List[str]): Input sequence (graphemes, phonemes, etc.).
         row_base (Dict): Metadata row (doc_id, sent_id, etc.).
-        section (str): Section type (e.g., 'grapheme', 'phoneme').
         prefix (str): Prefix for output table.
         gran (str): Granularity ('doc' or 'sent').
 
@@ -71,5 +70,10 @@ def compute_ngrams(PM, sequence: List[str], row_base: Dict, section: str, prefix
 
     # Insert summary row as first entry in ngram_data
     summary_data[f"{prefix}_ngram_summary"] = summary_row
+
+    if gran == "doc":
+        PM.ngram_id_doc += current_ngram_id
+    elif gran == "sent":
+        PM.ngram_id_sent += current_ngram_id
 
     return summary_data, ngram_data

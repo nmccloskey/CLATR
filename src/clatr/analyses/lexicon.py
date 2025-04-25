@@ -288,7 +288,7 @@ def analyze_lexicon(PM, sample_data):
                 func_data["freqs_tokenized"] = calculate_frequencies(doc, "semantic")
                 func_data["richness_tokenized"] = compute_lexical_richness(doc, "semantic")
 
-                summary_data, ngram_data = compute_ngrams(PM, tokens, sent_data_base, "lexicon", "lex", "sent")
+                summary_data, ngram_data = compute_ngrams(PM, tokens, sent_data_base, "lex", "sent")
                 func_data.update(summary_data)
 
                 for table, row_data in func_data.items():
@@ -329,7 +329,7 @@ def analyze_lexicon(PM, sample_data):
         func_data["freqs_tokenized"] = calculate_frequencies(doc, "semantic")
         func_data["richness_tokenized"] = compute_lexical_richness(doc, "semantic")
 
-        summary_data, ngram_data = compute_ngrams(PM, tokens, doc_data_base, "lexicon", "lex", "doc")
+        summary_data, ngram_data = compute_ngrams(PM, tokens, doc_data_base, "lex", "doc")
         func_data.update(summary_data)
 
         for table, row_data in func_data.items():

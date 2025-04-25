@@ -5,6 +5,7 @@ logger = logging.getLogger("CustomLogger")
 from utils.NLPmodel import NLPmodel
 from utils.OutputManager import OutputManager
 from data.data_processing import calc_props, get_most_common
+from analyses.ngrams import compute_ngrams
 
 
 def estimate_mlu(doc):
@@ -161,10 +162,20 @@ def analyze_morphology(PM, sample_data):
                 func_data = morphological_analysis(doc, 5)
                 func_data.update(analyze_spacy_features(doc, 5, "POS"))
 
+                pos_tags = [t.pos_ for t in doc]
+                summary_data, ngram_data = compute_ngrams(PM, pos_tags, sent_data_base.copy(), "pos", "sent")
+                func_data.update(summary_data)
+
                 for table, row_data in func_data.items():
                     sent_data = sent_data_base.copy()
                     sent_data.update(row_data)
                     results[f"{table}_sent"].append(sent_data)
+                
+                for table, data in ngram_data.items():
+                    for row_data in data:
+                        sent_ngram_data = sent_data_base.copy()
+                        sent_ngram_data.update(row_data)
+                        results[f"{table}_sent"].append(sent_ngram_data)                        
 
                 doc_cleaned += " " + cleaned
 
@@ -183,10 +194,20 @@ def analyze_morphology(PM, sample_data):
         func_data.update(morphological_analysis(doc, 10))
         func_data.update(analyze_spacy_features(doc, 10, "POS"))
 
+        pos_tags = [t.pos_ for t in doc]
+        summary_data, ngram_data = compute_ngrams(PM, pos_tags, doc_data_base, "pos", "doc")
+        func_data.update(summary_data)
+
         for table, row_data in func_data.items():
             doc_data = doc_data_base.copy()
             doc_data.update(row_data)
             results[f"{table}_doc"].update(doc_data)
+        
+        for table, data in ngram_data.items():
+            for row_data in data:
+                doc_ngram_data = doc_data_base.copy()
+                doc_ngram_data.update(row_data)
+                results[f"{table}_doc"].append(doc_ngram_data)   
 
         logger.info(f"Morphological analysis completed successfully.")
         return results

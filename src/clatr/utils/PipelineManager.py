@@ -60,7 +60,11 @@ SECTION_CONFIG = {
             "morph_stats": [
                 "morpheme_basic_specs", "morph_tag_counts", "morph_tag_props", "morph_tags_commonest",
                  "morph_tag_sets_commonest", "pos_tag_counts", "pos_tag_props", "pos_tags_commonest"
-            ]
+            ],
+
+            "pos_ngrams": [
+                "pos_ngram_summary"
+            ] + [f"pos_n{n}grams" for n in range(1, ngrams + 1)]
         }
     ),
     
@@ -102,23 +106,33 @@ SECTION_CONFIG = {
     )
 }
 
-
 class PipelineManager:
-    """
-    Manages initialization of analysis sections and their configuration.
-    """
+    _instance = None
+    _initialized = False  # Track initialization
+
+    def __new__(cls, OM: OutputManager):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance  # Always return the same instance
+
     def __init__(self, OM: OutputManager):
+        if self._initialized:
+            return  # Prevent re-initialization
+        
+        # Initialization logic
         self.om = OM
         self.sentence_level = OM.config.get("sentence_level", False)
         self.visualize = OM.visualize
         self.dep_trees = OM.config.get("dep_trees", False)
-        self.granularities = ["doc", "sent"] if self.om.config.get("sentence_level", False) else ["doc"]
+        self.granularities = ["doc", "sent"] if self.sentence_level else ["doc"]
         self.sections = {}  # section_name: Analysis instance
         self._init_analyses(SECTION_CONFIG)
-        self.analyses = {k for k in self.sections if self.om.sections.get(k, False)}
-        self.ngrams = ngrams
+        self.analyses = {k for k in self.sections if OM.sections.get(k, False)}
+        self.ngrams = ngrams  # You might want to pass this in
         self.ngram_id_sent = 1
         self.ngram_id_doc = 1
+
+        self._initialized = True  # Mark as initialized
 
     def _init_analyses(self, section_dict):
         for section, (func, table_structure) in section_dict.items():

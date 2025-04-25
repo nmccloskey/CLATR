@@ -121,7 +121,7 @@ def analyze_graphemes(PM, sample_data):
                 sent_data_base = {"doc_id": doc_id, "sent_id": sent_id}
                 func_data = count_graphemes(cleaned)
 
-                summary_data, ngram_data = compute_ngrams(PM, list(cleaned), sent_data_base, "graphemes", "grapheme", "sent")
+                summary_data, ngram_data = compute_ngrams(PM, list(cleaned), sent_data_base, "grapheme", "sent")
                 func_data.update(summary_data)
 
                 for table, row_data in func_data.items():
@@ -153,7 +153,7 @@ def analyze_graphemes(PM, sample_data):
         doc_data_base = {"doc_id": doc_id}
         func_data = count_graphemes(doc_cleaned)
 
-        summary_data, ngram_data = compute_ngrams(PM, list(doc_cleaned), doc_data_base, "graphemes", "grapheme", "doc")
+        summary_data, ngram_data = compute_ngrams(PM, list(doc_cleaned), doc_data_base, "grapheme", "doc")
         func_data.update(summary_data)
 
         for table, row_data in func_data.items():
