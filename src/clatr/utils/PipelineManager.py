@@ -44,7 +44,9 @@ SECTION_CONFIG = {
             "lex_measures": [
                 "freqs_cleaned", "freqs_tokenized", "richness_cleaned",
                 "richness_tokenized", "named_entities", "readability"
-            ]
+            ],
+            
+            "lex_ngrams": [f"lex_n{n}grams" for n in range(1, ngrams + 1)]
         }
     ),
     

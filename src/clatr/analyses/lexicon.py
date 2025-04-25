@@ -8,6 +8,7 @@ from wordfreq import word_frequency, zipf_frequency
 from data.data_processing import get_most_common
 from readability import Readability
 import textstat as tx
+from analyses.ngrams import compute_ngrams
 
 
 def calculate_frequencies(doc, label):
@@ -151,10 +152,6 @@ def process_named_entities(doc, num):
 
     return results
 
-def get_lexical_ngram_data(doc, N):
-    func_data = {""}
-    tokens = [token.text for token in doc if token.is_alpha]
-
 def calc_readability(doc):
     """
     Calculates various readability metrics for a given spaCy Doc object.
@@ -282,6 +279,7 @@ def analyze_lexicon(PM, sample_data):
                 sent_data_base = {"doc_id": doc_id, "sent_id": sent_id}
                 
                 doc = nlp(cleaned)
+                tokens = [token.text for token in doc if token.is_alpha]
                 func_data["freqs_cleaned"] = calculate_frequencies(doc, "cleaned")
                 func_data["richness_cleaned"] = compute_lexical_richness(doc, "cleaned")
                 func_data["named_entities"] = process_named_entities(doc, 3)
@@ -294,6 +292,14 @@ def analyze_lexicon(PM, sample_data):
                     sent_data = sent_data_base.copy()
                     sent_data.update(row_data)
                     results[f"{table}_sent"].append(sent_data)
+                
+                ngram_data = compute_ngrams(PM, tokens, sent_data_base, "lexicon", "lex", "sent")
+
+                for table, data in ngram_data.items():
+                    for row_data in data:
+                        sent_ngram_data = sent_data_base.copy()
+                        sent_ngram_data.update(row_data)
+                        results[f"{table}_sent"].append(sent_ngram_data)                        
                 
                 doc_cleaned += " " + sent["cleaned"]
                 doc_tokenized += " " + sent["semantic"] + "."
@@ -326,6 +332,14 @@ def analyze_lexicon(PM, sample_data):
             doc_data = doc_data_base.copy()
             doc_data.update(row_data)
             results[f"{table}_doc"].update(doc_data)
+        
+        ngram_data = compute_ngrams(PM, tokens, doc_data_base, "lexicon", "lex", "doc")
+
+        for table, data in ngram_data.items():
+            for row_data in data:
+                doc_ngram_data = doc_data_base.copy()
+                doc_ngram_data.update(row_data)
+                results[f"{table}_doc"].append(doc_ngram_data)   
 
         logger.info(f"Lexical analysis completed.")
         return results

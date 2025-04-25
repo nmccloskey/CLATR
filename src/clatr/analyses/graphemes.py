@@ -89,10 +89,6 @@ def count_graphemes(text):
         logger.error(f"Error processing text: {e}")
         return {"error": str(e)}
 
-def compute_grapheme_ngrams(text, PM):
-    ngrams = compute_ngrams(list(text), PM.ngram_id)
-
-
 def analyze_graphemes(PM, sample_data):
     """
     Performs graphemic analysis on document or sentence-level data.
