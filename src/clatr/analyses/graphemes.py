@@ -1,8 +1,11 @@
 import re
+import os
+import pandas as pd
 from collections import Counter
 import logging
 logger = logging.getLogger("CustomLogger")
 from data.data_processing import calc_props, get_most_common
+from analyses.ngrams import compute_ngrams
 
 
 SQL_PROBLEM_CHARS = {
@@ -86,6 +89,10 @@ def count_graphemes(text):
         logger.error(f"Error processing text: {e}")
         return {"error": str(e)}
 
+def compute_grapheme_ngrams(text, PM):
+    ngrams = compute_ngrams(list(text), PM.ngram_id)
+
+
 def analyze_graphemes(PM, sample_data):
     """
     Performs graphemic analysis on document or sentence-level data.
@@ -123,6 +130,14 @@ def analyze_graphemes(PM, sample_data):
                     sent_data.update(row_data)
                     results[f"{table}_sent"].append(sent_data)
 
+                ngram_data = compute_ngrams(PM, list(cleaned), sent_data_base, "graphemes", "grapheme", "sent")
+
+                for table, data in ngram_data.items():
+                    for row_data in data:
+                        sent_ngram_data = sent_data_base.copy()
+                        sent_ngram_data.update(row_data)
+                        results[f"{table}_sent"].append(sent_ngram_data)                        
+
                 doc_cleaned += " " + cleaned
 
             doc_cleaned = doc_cleaned.strip()
@@ -145,6 +160,14 @@ def analyze_graphemes(PM, sample_data):
             doc_data = doc_data_base.copy()
             doc_data.update(row_data)
             results[f"{table}_doc"].update(doc_data)
+
+        ngram_data = compute_ngrams(PM, list(doc_cleaned), doc_data_base, "graphemes", "grapheme", "doc")
+
+        for table, data in ngram_data.items():
+            for row_data in data:
+                doc_ngram_data = doc_data_base.copy()
+                doc_ngram_data.update(row_data)
+                results[f"{table}_doc"].append(doc_ngram_data)   
 
         logger.info(f"Graphemic analysis completed successfully.")
         return results

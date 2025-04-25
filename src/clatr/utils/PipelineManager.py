@@ -11,6 +11,8 @@ from analyses.phonology import analyze_phonology
 from analyses.semantics import analyze_semantics
 from analyses.mechanics import analyze_mechanics
 
+OM = OutputManager()
+ngrams = OM.config.get("ngrams", 5)
 
 # Section configuration: mapping section name to analysis function + raw table structure
 SECTION_CONFIG = {
@@ -30,7 +32,9 @@ SECTION_CONFIG = {
             "grapheme_stats": [
                 "grapheme_basic_specs", "grapheme_counts", "grapheme_props",
                 "grapheme_modes", "word_counts", "word_props"
-            ]
+            ],
+            
+            "grapheme_ngrams": [f"grapheme_n{n}grams" for n in range(1, ngrams + 1)]
         }
     ),
     
@@ -106,6 +110,9 @@ class PipelineManager:
         self.sections = {}  # section_name: Analysis instance
         self._init_analyses(SECTION_CONFIG)
         self.analyses = {k for k in self.sections if self.om.sections.get(k, False)}
+        self.ngrams = ngrams
+        self.ngram_id_sent = 1
+        self.ngram_id_doc = 1
 
     def _init_analyses(self, section_dict):
         for section, (func, table_structure) in section_dict.items():
@@ -120,6 +127,7 @@ class PipelineManager:
 
     def run_section(self, section, sample_data):
         # self.sections[section].create_raw_data_tables()
+        self.ngram_id_sent = self.ngram_id_doc = 1
         return self.sections[section].func(self, sample_data)
 
     def get_fact_table_name(self):
@@ -160,14 +168,26 @@ class Analysis:
                 for table in table_list:
                     table_name = f"{table}_{gran}"
                     file_name = f"{file_base}_{gran}.xlsx"
+
+                    if "ngrams" in file_base:
+                        pivot = {
+                            "index": "doc_id", "columns": "ngram", "values": "prop"
+                        }
+                        primary_keys = ["ngram_id"]
+                    else:
+                        pivot = None
+                        primary_keys = pks[gran]
+
                     self.om.create_table(
                         name=table_name,
                         sheet_name=table,
                         section=self.name,
                         subdir=self.name,
                         file_name=file_name,
-                        primary_keys=pks[gran]
+                        primary_keys=primary_keys,
+                        pivot=pivot
                     )
+
                     t = self.om.tables[table_name]
                     t.granularity = gran
                     t.family = file_base
@@ -198,5 +218,5 @@ class Analysis:
             for gran in self.granularities:
                 for table in table_names:
                     key = f"{table}_{gran}"
-                    results[key] = [] if gran == "sent" else {}
+                    results[key] = [] if gran == "sent" or table.endswith("grams") else {}
         return results

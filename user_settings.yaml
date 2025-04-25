@@ -1,7 +1,7 @@
 # Identify directories.
 input_dir: input
 output_dir: output
-output_label: test_readability
+output_label: test_ngrams
 database_dir: database
 
 # Control tabular output,
@@ -46,18 +46,20 @@ aggregate_with_clusters: False
 
 ## CLATR-specific:
 # Specify granularity.
-sentence_level: False
+sentence_level: True
 
 # Select analyses.
 sections: {
-    graphemes: False,
-    lexicon: True,
+    graphemes: True,
+    lexicon: False,
     morphology: False,
     syntax: False,
     phonology: False,
     semantics: False,
     mechanics: False
 }
+
+ngrams: 5
 
 dep_trees: False
 

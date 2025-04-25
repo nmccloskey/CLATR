@@ -88,8 +88,8 @@ class SQLDaemon:
             row_data (dict): The row data to insert or update.
         """
         # Identify primary keys (PKs) dynamically
-        PKs = [col for col in row_data.keys() if col.endswith("_id")]
-
+        # PKs = [col for col in row_data.keys() if col.endswith("_id")]
+        PKs = self.om.tables[table_name].get_pks()
         if not PKs:
             raise ValueError(f"Missing PKs in update data for table '{table_name}'")
 

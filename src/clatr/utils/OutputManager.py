@@ -81,10 +81,10 @@ class OutputManager:
         os.makedirs(self.database_dir, exist_ok=True)
         logger.info(f"Database set at {self.db_path}")
 
-    def create_table(self, name, sheet_name, section, subdir, file_name, primary_keys):
+    def create_table(self, name, sheet_name, section, subdir, file_name, primary_keys, pivot):
         table_dir = os.path.join(self.output_dir, subdir)
         logger.info(f"Creating table {name} with PKs {primary_keys} at {subdir}.")
-        self.tables[name] = Table(self, name, sheet_name, section, subdir, file_name, primary_keys)
+        self.tables[name] = Table(self, name, sheet_name, section, subdir, file_name, primary_keys, pivot)
         self.db.create_empty_table(name, primary_keys)
 
         try:
