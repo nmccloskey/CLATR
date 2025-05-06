@@ -152,6 +152,9 @@ def process_named_entities(doc, num):
 
     return results
 
+def safe_join(seq):
+    return ", ".join(str(x) for x in seq)
+
 def calc_readability(doc):
     """
     Calculates various readability metrics for a given spaCy Doc object.
@@ -197,16 +200,16 @@ def calc_readability(doc):
         f = r.flesch()
         func_data["flesch_score"] = f.score
         func_data["flesch_ease"] = f.ease
-        func_data["flesch_grade_levels"] = ", ".join(f.grade_levels)
+        func_data["flesch_grade_levels"] = safe_join(f.grade_levels)
 
         dc = r.dale_chall()
         func_data["dale_chall_score"] = dc.score
-        func_data["dc_grade_levels"] = ", ".join(dc.grade_levels)
+        func_data["dc_grade_levels"] = safe_join(dc.grade_levels)
 
         ari = r.ari()
         func_data["ari_score"] = ari.score
-        func_data["ari_grade_levels"] = ", ".join(ari.grade_levels)
-        func_data["ari_ages"] = ", ".join(ari.ages)
+        func_data["ari_grade_levels"] = safe_join(ari.grade_levels)
+        func_data["ari_ages"] = safe_join(ari.ages)
 
         cl = r.coleman_liau()
         func_data["coleman_liau_score"] = cl.score
@@ -236,7 +239,7 @@ def calc_readability(doc):
         func_data["text_standard"] = tx.text_standard(doc.text)
         func_data["num_difficult_words"] = tx.difficult_words(doc.text)
         func_data["prop_difficult_words"] = tx.difficult_words(doc.text) / len(doc)
-        func_data["difficult_words"] = ", ".join(tx.difficult_words_list(doc.text))
+        func_data["difficult_words"] = safe_join(tx.difficult_words_list(doc.text))
         func_data["mcalpine_eflaw"] = tx.mcalpine_eflaw(doc.text)
         func_data["reading_time"] = tx.reading_time(doc.text)
         func_data["LIX"] = tx.lix(doc.text)
@@ -320,6 +323,7 @@ def analyze_lexicon(PM, sample_data):
         doc_data_base = {"doc_id": doc_id}
             
         doc = nlp(doc_cleaned)
+        tokens = [token.text for token in doc if token.is_alpha]
         func_data["freqs_cleaned"] = calculate_frequencies(doc, "cleaned")
         func_data["richness_cleaned"] = compute_lexical_richness(doc, "cleaned")
         func_data["named_entities"] = process_named_entities(doc, 10)
