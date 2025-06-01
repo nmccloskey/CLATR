@@ -2,7 +2,7 @@
 
 ## Overview
 
-CLATR is a modular Python pipeline designed for computational linguistic analysis of textual data, providing detailed insights for linguistic research and analysis. It facilitates preprocessing, multiple specialized linguistic analyses, and comprehensive output management, including aggregation, comparison, clustering, and EDA capabilities.
+CLATR is a integrative Python pipeline designed for linguistic analysis of textual data, providing detailed insights for research and analysis. It facilitates preprocessing, multiple specialized linguistic analyses, and comprehensive output management, including aggregation, comparison, clustering, and EDA capabilities.
 
 ## Features
 
@@ -17,19 +17,6 @@ CLATR is a modular Python pipeline designed for computational linguistic analysi
   - Phonology
   - Semantics
   - Mechanics
-
-## Directory Structure
-
-```plaintext
-project/
-├── main.py                  # Entry point
-├── utils/                   # Pipeline and output management modules
-├── data/                    # Preprocessing and raw input handling
-├── analyses/                # Individual analysis functions per linguistic feature
-├── input/                   # Input .txt, .docx, .csv, .xlsx, .cha files
-├── output/                  # Processed data, visualizations, Excel tables
-└── database/                # (Optional) local database storage
-```
 
 ## How It Works
 
@@ -51,82 +38,135 @@ project/
    - Excel files saved under `/output/<section>/<granularity>`
    - Clustering, aggregation, and visualizations are optional
 
-## User Configuration (`user_settings.yaml`)
+---
+## Try the Web App
 
-### Input/Output
+You can use CLATR in your browser — no installation required:
 
-```yaml
-input_dir: input
-output_dir: output
-database_dir: database
-output_label: clatr_data
-```
+👉 [Launch the CLATR Web App](https://clatr.streamlit.app/)
 
-### Processing Flags
-
-```yaml
-sentence_level: True         # Use sentence or document granularity
-dep_trees: False             # Disable dependency trees
-exclude_speakers: [INV]      # Ignore specific speakers in .cha files
-```
-
-### Section Selection
-
-Enable or disable specific analyses:
-
-```yaml
-sections:
-  graphemes: False
-  lexicon: True
-  morphology: True
-  syntax: True
-  phonology: True
-  semantics: True
-  mechanics: False
-```
-
-### Aggregation & Group Comparison
-
-```yaml
-cluster: True
-aggregate: True
-compare_groups: False
-visualize: True
-
-cohen_d_threshold: 0.8
-max_feature_visuals: 5
-```
+---
 
 ## Installation
 
-### Recommended: Anaconda Navigator Command Line
+We recommend installing CLATR into a dedicated virtual environment using Anaconda:
 
-1. Create a virtual environment:
-   ```bash
-   conda create --name clatr_env python=3.9
-   ```
-2. Activate the environment:
-   ```bash
-   conda activate clatr_env
-   ```
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-## Usage
+### 1. Create and activate your environment:
 
 ```bash
-python src/clatr/main.py
+conda create --name clatr_env python=3.9
+conda activate clatr_env
 ```
 
-## Extending CLATR
+### 2. Install CLATR from GitHub:
+```bash
+pip install git+https://github.com/nmccloskey/clatr.git@refinements
+```
 
-To add custom analyses:
+---
 
-1. Add your analysis function in the `analyses/` directory.
-2. Update `SECTION_CONFIG` in `PipelineManager.py` to include your analysis function and desired table structures.
-3. Enable your analysis in the `user_settings.yaml`.
+## Setup
+
+To prepare for running CLATR, complete the following steps:
+
+### 1. Create your working directory:
+
+We recommend creating a fresh project directory where you'll run your analysis.
+
+Example structure:
+
+```plaintext
+your_project/
+├── config.yaml           # Configuration file (see below)
+└── data/
+    └── input/            # Place your CHAT (.cha) files and/or Excel data here
+                          # (CLATR will make output and sqlite database directories)
+```
+
+### 2. Provide a `config.yaml` file
+
+This file specifies the directories, selected analysis sections, and tier structure.
+
+You can download the example config file from the repo or create your own like this:
+
+```yaml
+# Identify directories.
+input_dir: "clatr_data/input"
+output_dir: "clatr_data/output"
+output_label: "test"
+database_dir: "clatr_data/database"
+
+# Control tabular output,
+cluster: False
+aggregate: False
+compare_groups: False
+
+# and visual output.
+visualize: False
+cohen_d_threshold: 0.8
+max_feature_visuals: 5
+
+# Designate groupings.
+tiers: {
+    site: {partition: False, regex: AC|BU|TU},
+    test: {partition: False, regex: Pre|Post|Maint},
+    participantID: {partition: False, regex: (AC|BU|TU)\d+},
+    narrative: {partition: False, regex: CATGrandpa|BrokenWindow|RefusedUmbrella|CatRescue|BirthdayScene}
+}
+
+# Group by each tier and each combination.
+comparison_combos: [
+    [test],
+    [narrative],
+]
+
+all_comparison_combos: False
+compare_with_clusters: False
+
+# Group by each tier and each combination.
+aggregation_combos: [
+    [site],
+    [test],
+    [narrative],
+    [participantID],
+    [test, narrative],
+    [test, participantID]
+]
+
+all_aggregation_combos: False
+aggregate_with_clusters: False
+
+## CLATR-specific:
+# Specify granularity.
+sentence_level: False
+
+# Select analyses.
+sections: {
+    graphemes: False,
+    lexicon: True,
+    morphology: False,
+    syntax: False,
+    phonology: False,
+    semantics: False,
+    mechanics: False
+}
+
+ngrams: 5
+
+dep_trees: False
+
+# .cha files
+exclude_speakers: [INV]
+
+```
+
+## Running the Program
+
+Once installed, CLATR can be run from any directory using the command-line interface:
+
+```bash
+clatr
+```
 
 ## Status and Contact
 
