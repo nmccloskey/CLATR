@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-from utils.logger import logger
+from clatr.utils.logger import logger
 from spacy import displacy
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF
