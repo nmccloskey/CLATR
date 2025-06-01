@@ -14,6 +14,7 @@ wordfreq>=3.1,<4.0
 pylangacq>=0.19,<1.0
 segments>=2.2,<3.0
 NRCLex>=3.0,<4.0
+py-readability-metrics>=1.4.5
 
 # Transformers + deep learning
 transformers>=4.49,<5.0
