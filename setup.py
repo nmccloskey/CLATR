@@ -17,7 +17,7 @@ setup(
     entry_points={
         "console_scripts": [
             "clatr=clatr.cli:main",
-            "streamlit_clatr=webapp.streamlit_app:main"
+            # "streamlit_clatr=webapp.streamlit_app:main"
         ]
     },
 )
