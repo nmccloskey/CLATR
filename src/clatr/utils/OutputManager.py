@@ -5,12 +5,12 @@ import pandas as pd
 from datetime import datetime
 import logging
 logger = logging.getLogger("CustomLogger")
-from utils.logger import logger, configure_file_handler
-from utils.Tier import TierManager
-from utils.EDADaemon import EDADaemon
-from utils.SQLDaemon import SQLDaemon
-from utils.Table import Table
-from data.visualization import visualize_distinctive_features, generate_corr_maps, generate_data_heatmaps
+from .utils.logger import logger, configure_file_handler
+from .utils.Tier import TierManager
+from .utils.EDADaemon import EDADaemon
+from .utils.SQLDaemon import SQLDaemon
+from .utils.Table import Table
+from .data.visualization import visualize_distinctive_features, generate_corr_maps, generate_data_heatmaps
 
 
 class OutputManager:
