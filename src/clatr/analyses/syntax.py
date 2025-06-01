@@ -10,9 +10,8 @@ from utils.NLPmodel import NLPmodel
 from zss import simple_distance, Node
 from dendropy import Tree, TaxonNamespace
 from dendropy.calculate import treecompare
-from utils.OutputManager import OutputManager
-from analyses.morphology import analyze_spacy_features
-from data.visualization import make_spacy_dep_pdfs
+from clatr.analyses.morphology import analyze_spacy_features
+from clatr.data.visualization import make_spacy_dep_pdfs
 
 
 def compute_tree_height(token):

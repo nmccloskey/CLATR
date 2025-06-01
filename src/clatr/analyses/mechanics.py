@@ -3,8 +3,8 @@ import language_tool_python
 from collections import Counter
 import logging
 logger = logging.getLogger("CustomLogger")
-from utils.NLPmodel import NLPmodel
-from data.data_processing import get_most_common
+from clatr.utils.NLPmodel import NLPmodel
+from clatr.data.data_processing import get_most_common
 
 
 def apply_language_tool(doc, num):

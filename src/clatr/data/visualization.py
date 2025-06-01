@@ -6,11 +6,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from utils.logger import logger
 from spacy import displacy
-from pathlib import Path
-import spacy
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF
-from utils.NLPmodel import NLPmodel
+from clatr.utils.NLPmodel import NLPmodel
 from PyPDF2 import PdfMerger
 import tempfile
 from tempfile import NamedTemporaryFile

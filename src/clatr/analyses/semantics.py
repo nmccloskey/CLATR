@@ -2,14 +2,13 @@ import warnings
 import numpy as np
 import logging
 logger = logging.getLogger("CustomLogger")
-from utils.NLPmodel import NLPmodel
+from clatr.utils.NLPmodel import NLPmodel
 from sklearn.preprocessing import normalize
-from utils.OutputManager import OutputManager
 from sklearn.decomposition import TruncatedSVD
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
-from data.data_processing import matrix_metrics
-from analyses.semantic_scoring import apply_Afinn, apply_VADER, apply_NRCLex, apply_TextBlob
+from clatr.data.data_processing import matrix_metrics
+from clatr.analyses.semantic_scoring import apply_Afinn, apply_VADER, apply_NRCLex, apply_TextBlob
 
 warnings.filterwarnings("ignore", message=".*TreeCRF.*does not define `arg_constraints`.*")
 

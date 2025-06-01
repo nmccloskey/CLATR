@@ -1,15 +1,15 @@
 import os
 import logging
 logger = logging.getLogger("CustomLogger")
-from utils.OutputManager import OutputManager
-from data.preprocessing import preprocess_text
-from analyses.graphemes import analyze_graphemes
-from analyses.lexicon import analyze_lexicon
-from analyses.morphology import analyze_morphology
-from analyses.syntax import analyze_syntax
-from analyses.phonology import analyze_phonology
-from analyses.semantics import analyze_semantics
-from analyses.mechanics import analyze_mechanics
+from clatr.utils.OutputManager import OutputManager
+from clatr.data.preprocessing import preprocess_text
+from clatr.analyses.graphemes import analyze_graphemes
+from clatr.analyses.lexicon import analyze_lexicon
+from clatr.analyses.morphology import analyze_morphology
+from clatr.analyses.syntax import analyze_syntax
+from clatr.analyses.phonology import analyze_phonology
+from clatr.analyses.semantics import analyze_semantics
+from clatr.analyses.mechanics import analyze_mechanics
 
 OM = OutputManager()
 ngrams = OM.config.get("ngrams", 5)

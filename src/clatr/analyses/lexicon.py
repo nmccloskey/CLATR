@@ -2,13 +2,13 @@ import numpy as np
 from collections import Counter
 import logging
 logger = logging.getLogger("CustomLogger")
-from utils.NLPmodel import NLPmodel
+from clatr.utils.NLPmodel import NLPmodel
 from lexicalrichness import LexicalRichness
 from wordfreq import word_frequency, zipf_frequency
-from data.data_processing import get_most_common
+from clatr.data.data_processing import get_most_common
 from readability import Readability
 import textstat as tx
-from analyses.ngrams import compute_ngrams
+from clatr.analyses.ngrams import compute_ngrams
 
 
 def calculate_frequencies(doc, label):

@@ -2,10 +2,9 @@ import numpy as np
 from collections import Counter
 import logging
 logger = logging.getLogger("CustomLogger")
-from utils.NLPmodel import NLPmodel
-from utils.OutputManager import OutputManager
-from data.data_processing import calc_props, get_most_common
-from analyses.ngrams import compute_ngrams
+from clatr.utils.NLPmodel import NLPmodel
+from clatr.data.data_processing import calc_props, get_most_common
+from clatr.analyses.ngrams import compute_ngrams
 
 
 def estimate_mlu(doc):

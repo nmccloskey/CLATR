@@ -4,9 +4,9 @@ from g2p_en import G2p
 from collections import Counter
 import logging
 logger = logging.getLogger("CustomLogger")
-from utils.NLPmodel import NLPmodel
-from utils.OutputManager import OutputManager
-from data.data_processing import calc_props, get_most_common
+from clatr.utils.NLPmodel import NLPmodel
+from clatr.utils.OutputManager import OutputManager
+from clatr.data.data_processing import calc_props, get_most_common
 
 def create_phoneme_tables():
     OM = OutputManager()

@@ -1,11 +1,9 @@
 import re
-import os
-import pandas as pd
 from collections import Counter
 import logging
 logger = logging.getLogger("CustomLogger")
-from data.data_processing import calc_props, get_most_common
-from analyses.ngrams import compute_ngrams
+from clatr.data.data_processing import calc_props, get_most_common
+from clatr.analyses.ngrams import compute_ngrams
 
 
 SQL_PROBLEM_CHARS = {
