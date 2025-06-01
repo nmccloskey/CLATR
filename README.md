@@ -39,13 +39,6 @@ CLATR is a integrative Python pipeline designed for linguistic analysis of textu
    - Clustering, aggregation, and visualizations are optional
 
 ---
-## Try the Web App
-
-You can use CLATR in your browser — no installation required:
-
-👉 [Launch the CLATR Web App](https://clatr.streamlit.app/)
-
----
 
 ## Installation
 
