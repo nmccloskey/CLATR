@@ -1,8 +1,8 @@
 # Identify directories.
-input_dir: input
-output_dir: output
-output_label: stats_project_lexicon_redo
-database_dir: database
+input_dir: "clatr_data/input"
+output_dir: "clatr_data/output"
+output_label: "test"
+database_dir: "clatr_data/database"
 
 # Control tabular output,
 cluster: False

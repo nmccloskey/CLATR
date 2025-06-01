@@ -1,7 +1,7 @@
 from tqdm import tqdm
-from utils.logger import logger
-from utils.OutputManager import OutputManager
-from utils.PipelineManager import PipelineManager
+from .utils.logger import logger
+from .utils.OutputManager import OutputManager
+from .utils.PipelineManager import PipelineManager
 
 
 def main():

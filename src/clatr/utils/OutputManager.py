@@ -45,16 +45,16 @@ class OutputManager:
             logger.error(f"Error loading config file {file_path}: {e}")
             return {}
     
-    def _load_config(self, config_file="user_settings.yaml"):
+    def _load_config(self, config_file="config.yaml"):
         self.config = self._load_yaml(config_file)
         logger.info(f"Loaded config: {self.config}")
 
         self.output_label = self.config.get("output_label", "")
         configure_file_handler(self.output_label)
 
-        self.input_dir = self.config.get("input_dir", "input")
-        self.output_dir = self.config.get("output_dir", "output")
-        self.database_dir = self.config.get("database_dir", "database")
+        self.input_dir = os.path.abspath(os.path.expanduser(self.config.get('input_dir', 'clatr_data/input')))
+        self.output_dir = os.path.abspath(os.path.expanduser(self.config.get('output_dir', 'clatr_data/output')))
+        self.database_dir = os.path.abspath(os.path.expanduser(self.config.get('database_dir', 'clatr_data/database')))
         self.sections = self.config.get("sections", {})
         
         self.cluster = self.config.get("cluster", False)
@@ -78,6 +78,8 @@ class OutputManager:
     def _init_output_dir(self):
         self.timestamp = datetime.now().strftime("%y%m%d_%H%M")
         self.output_dir = os.path.join(self.output_dir, f"{self.output_label}_{self.timestamp}")
+        os.makedirs(self.output_dir, exist_ok=True)
+        logger.info(f"Output directory set at {self.output_dir}")
     
     def _init_db(self):
         """Initializes database path and creates empty tables via SQLDaemon."""
