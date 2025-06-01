@@ -16,7 +16,7 @@ segments>=2.2,<3.0
 NRCLex>=3.0,<4.0
 py-readability-metrics>=1.4.5
 textstat>=0.7.7
-g2p>=2.2.1
+g2p-en>=2.1.0
 
 # Transformers + deep learning
 transformers>=4.49,<5.0
