@@ -2,7 +2,8 @@ import numpy as np
 from collections import Counter
 import logging
 logger = logging.getLogger("CustomLogger")
-from clatr.utils.NLPmodel import NLPmodel
+# from clatr.utils.NLPmodel import NLPmodel
+from infoscopy.nlp_utils.NLPmodel import NLPmodel
 from clatr.data.data_processing import calc_props, get_most_common
 from clatr.analyses.ngrams import compute_ngrams
 

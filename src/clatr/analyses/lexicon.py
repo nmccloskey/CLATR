@@ -2,7 +2,8 @@ import numpy as np
 from collections import Counter
 import logging
 logger = logging.getLogger("CustomLogger")
-from clatr.utils.NLPmodel import NLPmodel
+# from clatr.utils.NLPmodel import NLPmodel
+from infoscopy.nlp_utils.NLPmodel import NLPmodel
 from lexicalrichness import LexicalRichness
 from wordfreq import word_frequency, zipf_frequency
 from clatr.data.data_processing import get_most_common

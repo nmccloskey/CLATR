@@ -3,7 +3,8 @@ import language_tool_python
 from collections import Counter
 import logging
 logger = logging.getLogger("CustomLogger")
-from clatr.utils.NLPmodel import NLPmodel
+# from clatr.utils.NLPmodel import NLPmodel
+from infoscopy.nlp_utils.NLPmodel import NLPmodel
 from clatr.data.data_processing import get_most_common
 
 

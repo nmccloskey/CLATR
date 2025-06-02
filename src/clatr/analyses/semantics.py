@@ -2,7 +2,8 @@ import warnings
 import numpy as np
 import logging
 logger = logging.getLogger("CustomLogger")
-from clatr.utils.NLPmodel import NLPmodel
+# from clatr.utils.NLPmodel import NLPmodel
+from infoscopy.nlp_utils.NLPmodel import NLPmodel
 from sklearn.preprocessing import normalize
 from sklearn.decomposition import TruncatedSVD
 from sklearn.metrics.pairwise import cosine_similarity

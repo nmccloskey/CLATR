@@ -9,7 +9,8 @@ from infoscopy.utils.logger import logger
 from spacy import displacy
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF
-from clatr.utils.NLPmodel import NLPmodel
+# from clatr.utils.NLPmodel import NLPmodel
+from infoscopy.nlp_utils.NLPmodel import NLPmodel
 from PyPDF2 import PdfMerger
 import tempfile
 from tempfile import NamedTemporaryFile

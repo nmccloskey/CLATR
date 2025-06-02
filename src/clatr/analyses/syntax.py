@@ -6,7 +6,8 @@ from collections import Counter
 import logging
 logger = logging.getLogger("CustomLogger")
 from nltk import Tree as nltkTree
-from clatr.utils.NLPmodel import NLPmodel
+# from clatr.utils.NLPmodel import NLPmodel
+from infoscopy.nlp_utils.NLPmodel import NLPmodel
 from zss import simple_distance, Node
 from dendropy import Tree, TaxonNamespace
 from dendropy.calculate import treecompare
