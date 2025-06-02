@@ -1,7 +1,7 @@
 # Identify directories.
 input_dir: "clatr_data/input"
 output_dir: "clatr_data/output"
-output_label: "test"
+output_label: "test Infoscopy refactor"
 database_dir: "clatr_data/database"
 
 # Control tabular output,
@@ -50,8 +50,8 @@ sentence_level: False
 
 # Select analyses.
 sections: {
-    graphemes: False,
-    lexicon: True,
+    graphemes: True,
+    lexicon: False,
     morphology: False,
     syntax: False,
     phonology: False,
