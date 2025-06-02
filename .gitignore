@@ -4,12 +4,31 @@ input/
 logs/
 database/
 *.sqlite
-*.log
-venv*/
-__pycache__/
 *.pyc
 .DS_Store
 .env
 *.xlsx
 *.pdf
 *.png
+
+# Python packaging
+*.egg-info/
+*.egg-info
+build/
+dist/
+
+# Virtual environments (if you keep them in project root)
+venv*/
+.venv*/
+
+# Bytecode
+__pycache__/
+*.py[cod]
+
+# VS Code
+.vscode/
+
+# Logs, cache, misc
+*.log
+.cache/
+*.pkl
