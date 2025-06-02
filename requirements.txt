@@ -89,4 +89,3 @@ debugpy>=1.8,<2.0
 
 # Analysis pipeline ossature
 # git+https://github.com/nmccloskey/infoscopy.git@dev
--e ../Infoscopy

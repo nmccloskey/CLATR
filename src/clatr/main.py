@@ -1,5 +1,6 @@
 from tqdm import tqdm
-from clatr.utils.logger import logger
+# from clatr.utils.logger import logger
+from infoscopy.utils.logger import logger
 from clatr.utils.OutputManager import OutputManager
 from clatr.utils.PipelineManager import PipelineManager
 
