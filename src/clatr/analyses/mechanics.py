@@ -5,7 +5,8 @@ import logging
 logger = logging.getLogger("CustomLogger")
 # from clatr.utils.NLPmodel import NLPmodel
 from infoscopy.nlp_utils.NLPmodel import NLPmodel
-from clatr.data.data_processing import get_most_common
+# from clatr.data.data_processing import get_most_common
+from infoscopy.nlp_utils.data_processing import get_most_common
 
 
 def apply_language_tool(doc, num):

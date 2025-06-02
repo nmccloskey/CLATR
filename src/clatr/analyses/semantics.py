@@ -8,7 +8,8 @@ from sklearn.preprocessing import normalize
 from sklearn.decomposition import TruncatedSVD
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
-from clatr.data.data_processing import matrix_metrics
+# from clatr.data.data_processing import matrix_metrics
+from infoscopy.nlp_utils.data_processing import matrix_metrics
 from clatr.analyses.semantic_scoring import apply_Afinn, apply_VADER, apply_NRCLex, apply_TextBlob
 
 warnings.filterwarnings("ignore", message=".*TreeCRF.*does not define `arg_constraints`.*")

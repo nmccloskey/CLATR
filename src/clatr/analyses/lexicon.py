@@ -6,7 +6,8 @@ logger = logging.getLogger("CustomLogger")
 from infoscopy.nlp_utils.NLPmodel import NLPmodel
 from lexicalrichness import LexicalRichness
 from wordfreq import word_frequency, zipf_frequency
-from clatr.data.data_processing import get_most_common
+# from clatr.data.data_processing import get_most_common
+from infoscopy.nlp_utils.data_processing import get_most_common
 from readability import Readability
 import textstat as tx
 from clatr.analyses.ngrams import compute_ngrams
