@@ -12,8 +12,8 @@ from zss import simple_distance, Node
 from dendropy import Tree, TaxonNamespace
 from dendropy.calculate import treecompare
 from clatr.analyses.morphology import analyze_spacy_features
-from clatr.data.visualization import make_spacy_dep_pdfs
-
+# from clatr.data.visualization import make_spacy_dep_pdfs
+from infoscopy.utils.visualization import make_spacy_dep_pdfs
 
 def compute_tree_height(token):
     """Recursively compute the height of the syntactic tree."""
