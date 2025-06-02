@@ -6,7 +6,8 @@ import logging
 from pathlib import Path
 logger = logging.getLogger("CustomLogger")
 from clatr.utils.NLPmodel import NLPmodel
-from clatr.utils.OutputManager import OutputManager
+# from clatr.utils.OutputManager import OutputManager
+from infoscopy.utils.OutputManager import OutputManager
 from clatr.data.data_processing import scrub_raw_text, clean_text, get_text_from_cha, get_two_cha_versions
 
 
