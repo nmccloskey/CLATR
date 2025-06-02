@@ -3,7 +3,8 @@ import logging
 logger = logging.getLogger("CustomLogger")
 # from clatr.utils.OutputManager import OutputManager
 from infoscopy.utils.OutputManager import OutputManager
-from clatr.data.preprocessing import preprocess_text
+# from clatr.data.preprocessing import preprocess_text
+from infoscopy.nlp_utils.preprocessing import preprocess_text
 from clatr.analyses.graphemes import analyze_graphemes
 from clatr.analyses.lexicon import analyze_lexicon
 from clatr.analyses.morphology import analyze_morphology
