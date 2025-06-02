@@ -5,14 +5,14 @@ from collections import Counter
 import logging
 logger = logging.getLogger("CustomLogger")
 from clatr.utils.NLPmodel import NLPmodel
-from clatr.utils.OutputManager import OutputManager
+# from clatr.utils.OutputManager import OutputManager
 from clatr.data.data_processing import calc_props, get_most_common
 
-def create_phoneme_tables():
-    OM = OutputManager()
-    OM.create_table("phoneme_stats_doc", "phonemes", ["doc_id"]) 
-    if OM.config.get("sentence_level", False):   
-        OM.create_table("phoneme_stats_sent", "phonemes", ["doc_id", "sent_id"])
+# def create_phoneme_tables():
+#     OM = OutputManager()
+#     OM.create_table("phoneme_stats_doc", "phonemes", ["doc_id"]) 
+#     if OM.config.get("sentence_level", False):   
+#         OM.create_table("phoneme_stats_sent", "phonemes", ["doc_id", "sent_id"])
 
 # Mapping phonemes to phonetic feature classes
 PHONETIC_FEATURES_IPA = {
