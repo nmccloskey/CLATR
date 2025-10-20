@@ -58,3 +58,7 @@ Thumbs.db
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Metadata
+metadata/
+clatr_metadata.xlsx

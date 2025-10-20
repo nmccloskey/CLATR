@@ -3,7 +3,7 @@ from tqdm import tqdm
 from infoscopy.utils.logger import logger
 # from clatr.utils.OutputManager import OutputManager
 from infoscopy.utils.OutputManager import OutputManager
-from clatr.utils.PipelineManager import PipelineManager
+from  .utils.PipelineManager import PipelineManager
 
 
 def main():
