@@ -62,3 +62,7 @@ Thumbs.db
 # Metadata
 metadata/
 clatr_metadata.xlsx
+
+# Configs
+config.yaml
+*.secrets.yaml
