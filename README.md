@@ -1,5 +1,12 @@
 # CLATR - Computational Linguistic Analysis of Text for Research
 
+## CLATR Status Notice
+
+CLATR is currently in a developmental and transitional state.
+This repository reflects an early-stage general linguistic analysis prototype that originated as an independent research project. While the architecture remains of interest, the active line of clinical development has now shifted to ELASTICAS, a specialized aphasiology-focused fork designed to meet domain-specific needs.
+
+CLATR’s API, design goals, and long-term trajectory are under review and may change substantially as the project evolves into a more generalized successor to ELASTICAS. Users seeking a clinically oriented workflow should refer to the ELASTICAS repository instead.
+
 ## Overview
 
 CLATR is a integrative Python pipeline designed for linguistic analysis of textual data, providing detailed insights for research and analysis. It facilitates preprocessing, multiple specialized linguistic analyses, and comprehensive output management, including aggregation, comparison, clustering, and EDA capabilities.
@@ -187,5 +194,3 @@ No core functionality or implementation history has been lost, and the full pipe
 If using CLATR in your research, please cite:
 
 > McCloskey, N., et al. (2025, April). *The RASCAL pipeline: User-friendly and time-saving computational resources for coding and analyzing language samples*. Poster presented at the Aphasia Access Leadership Summit, Pittsburgh, PA.
-
-A copy of the poster will be available through Aphasia Access shared resources.
