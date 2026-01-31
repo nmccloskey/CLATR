@@ -3,9 +3,7 @@
 ## CLATR Status Notice
 
 CLATR is currently in a developmental and transitional state (version 0.0.1a1).
-This repository reflects an early-stage general linguistic analysis prototype that originated as an independent research project. While the architecture remains of interest, the active line of clinical development has now shifted to ELASTICAS, a specialized aphasiology-focused fork designed to meet domain-specific needs.
-
-CLATR’s API, design goals, and long-term trajectory are under review and may change substantially as the project evolves into a more generalized successor to ELASTICAS. Users seeking a clinically oriented workflow should refer to the ELASTICAS repository instead.
+This repository reflects an early-stage general linguistic analysis prototype that originated as an independent research project. While the architecture remains of interest, the active line of development has now shifted to ALASTR, a specialized speech transcript-focused fork designed to meet domain-specific needs.
 
 ## Overview
 
@@ -54,14 +52,20 @@ We recommend installing CLATR into a dedicated virtual environment using Anacond
 ### 1. Create and activate your environment:
 
 ```bash
-conda create --name clatr_env python=3.9
-conda activate clatr_env
+conda create --name clatr python=3.12
+conda activate clatr
 ```
 
 ### 2. Install CLATR from GitHub:
 ```bash
-pip install git+https://github.com/nmccloskey/clatr.git@refinements
+pip install git+https://github.com/nmccloskey/clatr.git@main
 ```
+
+### or from PyPI:
+```bash
+pip install clatr
+```
+
 
 ---
 
